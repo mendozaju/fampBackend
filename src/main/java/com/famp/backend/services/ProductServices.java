@@ -3,7 +3,9 @@ package com.famp.backend.services
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,28 +23,37 @@ public class ProductServices {
 	
 	@Autowired
 	ProductRepository repository;	
-	ApplicationContext applicationContext;
+	ApplicationContext context =new ClassPathXmlApplicationContext("application-context.xml");
+	Logger log = Logger.getLogger(ProductServices.class.getName());
 	
 	
 	public ProductServices() {
-		applicationContext = new ClassPathXmlApplicationContext("/application-context.xml");
 	}
 	
 	
-	public ArrayList<ProductBean> getProducts(){		
+	public List<ProductBean> getProducts(){
+		log.info("Inicio de metodo");
 		
-		Mapper mapper = (Mapper) applicationContext.getBean("mapper");
-		ArrayList<ProductBean> result = new ArrayList<ProductBean>();
+		List<Product> entityProducts = repository.findAll();
+		Iterator<Product> it = entityProducts.iterator();
 		
-		ArrayList<Product> productsOfRepository = (ArrayList<Product>) repository.findAll();
-		Iterator<Product> it = productsOfRepository.iterator();
+		List<ProductBean> response = new ArrayList<ProductBean>(); 
 		
 		while(it.hasNext()){
-			ProductBean myProduct = mapper.map(it.next(), ProductBean.class);
-			result.add(myProduct);			
+			
+			Product myEntityProduct= it.next();
+			
+			ProductBean product = (ProductBean) context.getBean("product");
+			product.setId(myEntityProduct.getId());
+			product.setName(myEntityProduct.getName());
+			product.setPrice(myEntityProduct.getPrice());
+			product.setStock(myEntityProduct.getStock());
+			
+			response.add(product);
 		}
 		
-		return result;		
+		log.info("Fin de metodo");
+		return response;		
 	}
 
 }

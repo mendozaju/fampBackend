@@ -17,8 +17,46 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	Integer id;
 	
-	@Column(name="PRODUCT_DESCRIPTIOM")
-	String description;
-	
+	@Column(name="PRODUCT_NAME")
+	String name;
 
+	@Column(name="PRODUCT_PRICE", columnDefinition="default '0.00'")
+	Double price;
+
+	@Column(name="PRODUCT_STOCK", columnDefinition="default '0'")
+	Integer stock;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public Integer getStock() {
+		return stock;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+	
+	
 }

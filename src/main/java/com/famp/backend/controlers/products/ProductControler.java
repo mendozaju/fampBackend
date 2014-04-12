@@ -1,6 +1,7 @@
 package com.famp.backend.controlers.products;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.famp.backend.domain.DataResponse;
 import com.famp.backend.domain.ProductBean;
 import com.famp.backend.services.ProductServices;
 
 @Controller
-
 public class ProductControler {
 	
 	static Logger log = Logger.getLogger(ProductControler.class.getName());
@@ -27,35 +28,20 @@ public class ProductControler {
 	
 	@RequestMapping(value="/products")
 	@ResponseBody
-	public ArrayList<ProductBean> getProducts(HttpServletResponse response){
+	public DataResponse getProducts(HttpServletResponse response){
 		log.info("Inicio del metodo");
 		
-		ArrayList<ProductBean> products = new  ArrayList<ProductBean>();		
+		//Creo la respuesta
+		DataResponse dataResponse = (DataResponse)context.getBean("dataResponse");
 		
-		ProductBean myProduct1 = (ProductBean) context.getBean("product");
-		myProduct1.setId(1);
-		myProduct1.setName("Tablet Bangho XT45");
-		myProduct1.setPrice(1200.59);
-		myProduct1.setStock(10);	
+		//Obtengo todos los productos del servicio
+		List<ProductBean> products =  service.getProducts();
 		
-		ProductBean myProduct2 = new ProductBean();
-		myProduct2.setId(2);
-		myProduct2.setName("Samsung Galaxy S4");
-		myProduct2.setPrice(6399.29);
-		myProduct2.setStock(400);
-		
-		ProductBean myProduct3 = new ProductBean();
-		myProduct3.setId(3);
-		myProduct3.setName("Monitor LED LG");
-		myProduct3.setPrice(2600.0);
-		myProduct3.setStock(15);
-		
-		products.add(myProduct1);
-		products.add(myProduct2);
-		products.add(myProduct3);
+		dataResponse.setData(products);
 		
 		log.info("Fin del metodo");
-		return products;		
+		//Retorno los productos
+		return dataResponse;		
 	}
 
 }

@@ -15,5 +15,6 @@
 	</bean>
 	
 	<bean id="product" class="com.famp.backend.domain.ProductBean" scope="prototype"/>
+	<bean id="dataResponse" class="com.famp.backend.domain.DataResponse" scope="prototype"/>
 
 </beans>
