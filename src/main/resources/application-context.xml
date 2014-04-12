@@ -13,5 +13,7 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="product" class="com.famp.backend.domain.ProductBean" scope="prototype"/>
 
 </beans>

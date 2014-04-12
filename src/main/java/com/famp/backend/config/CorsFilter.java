@@ -21,7 +21,6 @@ public class CorsFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-    		System.out.println("Entre al filtro");
             response.addHeader("Access-Control-Allow-Origin", "*");          
             response.addHeader("Access-Control-Allow-Methods","GET, POST, PUT");
             response.addHeader("Access-Control-Allow-Headers","accept, content-type");

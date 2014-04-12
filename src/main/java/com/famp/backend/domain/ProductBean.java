@@ -3,17 +3,27 @@ package com.famp.backend.domain;
 public class ProductBean {
 	
 	Integer id;
-	String description;
+	String name;
 	Double price;
+	Integer stock;
 	
+	public Integer getStock() {
+		return stock;
+	}
+
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
 	public ProductBean(){
 		this.id = null;
-		this.description = "";
-		this.price = null;
+		this.name = "";
+		this.price = 0.0;
+		this.stock = 0;
 	}
 	
-	public void setDescription(String productDescription){
-		this.description =productDescription;
+	public void setName(String productName){
+		this.name =productName;
 	}
 	
 	public void setId(Integer productId){
@@ -24,8 +34,8 @@ public class ProductBean {
 		this.price= productPrice;		
 	}
 	
-	public String getDescription(){
-		return this.description;
+	public String getName(){
+		return this.name;
 	}
 	
 	public Integer getId(){

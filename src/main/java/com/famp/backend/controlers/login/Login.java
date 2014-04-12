@@ -13,7 +13,7 @@ import com.famp.backend.util.WriterResponse;
 
 
 @Controller
-@RequestMapping(value="/login")
+@RequestMapping(value="/")
 public class Login {
 
 	@RequestMapping(value="/loginerror")
@@ -31,6 +31,18 @@ public class Login {
 		
 		
 		return null;
+	}
+	
+	@RequestMapping(value="/")
+	public String home(HttpServletResponse response, HttpServletRequest request){
+		
+		WriterResponse writer = new WriterResponse();
+		try {
+			writer.writeResponse(response, "Aplicacion de backend");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;		
 	}
 	
 }
