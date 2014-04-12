@@ -16,5 +16,9 @@ public class Product {
 	@Column(name = "PRODUCT_ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	Integer id;
+	
+	@Column(name="PRODUCT_DESCRIPTIOM")
+	String description;
+	
 
 }

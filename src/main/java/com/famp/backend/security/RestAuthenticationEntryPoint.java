@@ -16,7 +16,13 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 	public void commence(HttpServletRequest request, HttpServletResponse response,
 			org.springframework.security.core.AuthenticationException authException)
 			throws IOException, ServletException {
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No posee autorizacion");
+		
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No posee autorizacion pro");
+		
+		
+		
+		
 		
 	}
 }

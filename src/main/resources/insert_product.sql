@@ -1,0 +1,4 @@
+--create table PRODUCT (PRODUCT_ID integer not null, PRODUCT_DESCRIPTION varchar(255), primary key (PRODUCT_ID));
+--insert into PRODUCT (PRODUCT_ID, PRODUCT_DESCRIPTION) values (1,'frigorificos1@senasa.gov.ar');
+--create table PRODUCT2 (PRODUCT_ID integer not null, PRODUCT_DESCRIPTIOM varchar(255), primary key (PRODUCT_ID));
+--commit;

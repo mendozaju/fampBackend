@@ -26,12 +26,15 @@ public class MySavedRequestAwareAuthenticationSuccessHandler extends
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		if (savedRequest == null) {
 			clearAuthenticationAttributes(request);
-			
-			response.setStatus(response.SC_ACCEPTED);
-			
+			System.out.println("Se autentico correctamente 1");
 			PrintWriter out = response.getWriter();
-			out.print("ok");
+			out.print("ok con headers");
 			out.flush();
+			response.addHeader("Access-Control-Allow-Origin", "*");          
+            response.addHeader("Access-Control-Allow-Methods","GET, POST, PUT");
+            response.addHeader("Access-Control-Allow-Headers","accept, content-type");
+            response.addHeader("Access-Control-Allow-Credentials","true");
+			
 			
 			
 			return;
@@ -40,11 +43,23 @@ public class MySavedRequestAwareAuthenticationSuccessHandler extends
 		if (isAlwaysUseDefaultTargetUrl()
 				|| (targetUrlParam != null && StringUtils.hasText(request
 						.getParameter(targetUrlParam)))) {
+			System.out.println("Se autentico correctamente 2");
 			requestCache.removeRequest(request, response);
 			clearAuthenticationAttributes(request);
+			response.addHeader("Access-Control-Allow-Origin", "*");          
+            response.addHeader("Access-Control-Allow-Methods","GET, POST, PUT");
+            response.addHeader("Access-Control-Allow-Headers","accept, content-type");
+            response.addHeader("Access-Control-Allow-Credentials","true");
+			
 			return;
 		}
+		
 		clearAuthenticationAttributes(request);
+		System.out.println("Se autentico correctamente 3");
+		response.addHeader("Access-Control-Allow-Origin", "*");          
+        response.addHeader("Access-Control-Allow-Methods","GET, POST, PUT");
+        response.addHeader("Access-Control-Allow-Headers","accept, content-type");
+        response.addHeader("Access-Control-Allow-Credentials","true");
 	}
 
 	public void setRequestCache(RequestCache requestCache) {

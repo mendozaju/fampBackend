@@ -7,9 +7,8 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @Configuration
-@ImportResource({ "classpath*:/rest_security_config.xml","classpath*:/jpa_config.xml" })
+@ImportResource({ "classpath*:/rest_security_config.xml","classpath*:/jpa_config.xml", "classpath*:/application-context.xml" })
 @ComponentScan(basePackages = "com.famp.backend.*")
-//@PropertySource({ "classpath:rest.properties", "classpath:web.properties" })
 public class AppConfig {
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer properties() {
