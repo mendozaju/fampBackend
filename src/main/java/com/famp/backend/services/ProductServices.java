@@ -26,11 +26,11 @@ public class ProductServices {
 	ApplicationContext context =new ClassPathXmlApplicationContext("application-context.xml");
 	Logger log = Logger.getLogger(ProductServices.class.getName());
 	
-	
-	public ProductServices() {
-	}
-	
-	
+	/**
+	 * Retorna todos los productos existentes 
+	 * @author juan eduardo mendoza
+	 * @return
+	 */
 	public List<ProductBean> getProducts(){
 		log.info("Inicio de metodo");
 		
@@ -56,4 +56,40 @@ public class ProductServices {
 		return response;		
 	}
 
+	/**
+	 * Guarda un producto
+	 * @author juan mendoza
+	 * @param product
+	 */
+	public int saveProduct(ProductBean product){
+		
+		//Conviert mi objeto de dominio a una entidad
+		Product aProduct = this.convertToEntity(product);
+		
+		//Guardo mi producto
+		Product savedProduct = repository.save(aProduct);
+		
+		//Retorno el id del producto guardado
+		return savedProduct.getId();
+	}
+
+	/**
+	 * Convierte un producto de dominio a un producto de entidad
+	 * @author Erwin_PC
+	 * @param product
+	 * @return
+	 */
+	private Product convertToEntity(ProductBean product) {
+		
+		//Creo un producto entidad
+		Product myProduct = (Product) context.getBean("productEntity");
+		
+		//Seteo los valores
+		myProduct.setName(product.getName());
+		myProduct.setPrice(product.getPrice());
+		myProduct.setStock(product.getStock());
+		
+		//Retorno el producto entidad
+		return myProduct;
+	}
 }

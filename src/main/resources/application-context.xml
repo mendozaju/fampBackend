@@ -14,7 +14,11 @@
 		</property>
 	</bean>
 	
+	<!-- Objetos del dominio -->
 	<bean id="product" class="com.famp.backend.domain.ProductBean" scope="prototype"/>
 	<bean id="dataResponse" class="com.famp.backend.domain.DataResponse" scope="prototype"/>
+	
+	<!-- Objetos entities -->
+	<bean id="productEntity" class="com.famp.backend.services.entities.Product" scope="prototype"/>
 
 </beans>

@@ -12,15 +12,30 @@
 
 
 	<!-- Data Base -->
-	<jdbc:embedded-database id="datasource" type="H2">
+	<jdbc:embedded-database id="datasourceH2" type="H2">
 		<jdbc:script location="classpath:insert_product.sql"/>
 	</jdbc:embedded-database>
+	
+	<!-- Data Source MySql -->
+	<bean id="dataSourceMySql" 
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+      <property name="url" value="jdbc:mysql://localhost:3306/famp"/>
+      <property name="username" value="famper"/>
+      <property name="password" value="famper"/>
+   </bean>
 
 	<!-- Entity Manager -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="datasource" />
+		
+		<property name="dataSource" ref="datasourceH2" />
 		<property name="persistenceUnitName" value="persistenceUnit" />
+		
+		<!--  
+		<property name="dataSource" ref="dataSourceMySql" />
+		<property name="persistenceUnitName" value="mysql" />
+		-->
 	</bean>
 
 	<!-- Transaction Manager -->

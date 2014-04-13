@@ -3,9 +3,11 @@ package com.famp.backend.controlers.products;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.famp.backend.domain.DataResponse;
 import com.famp.backend.domain.ProductBean;
 import com.famp.backend.services.ProductServices;
+import com.famp.backend.services.entities.Product;
 
 @Controller
 public class ProductControler {
@@ -28,6 +31,11 @@ public class ProductControler {
 	
 	@RequestMapping(value="/products")
 	@ResponseBody
+	/**
+	 * @author juan eduardo mendoza
+	 * @param response
+	 * @return
+	 */
 	public DataResponse getProducts(HttpServletResponse response){
 		log.info("Inicio del metodo");
 		
@@ -42,6 +50,32 @@ public class ProductControler {
 		log.info("Fin del metodo");
 		//Retorno los productos
 		return dataResponse;		
+	}
+	
+	@RequestMapping(value="/products/save")
+	@ResponseBody
+	/**
+	 * @author juan eduardo mendoza
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public int saveProduct(HttpServletRequest request, HttpServletResponse response){
+		log.info("Inicio del metodo");	
+		
+		//TODO: Se tiene que construir el producto con los datos del request
+		ProductBean productBean = (ProductBean) context.getBean("product");
+		productBean.setId(100);
+		productBean.setName("Producto de prueba");
+		productBean.setPrice(10.20);
+		productBean.setStock(8);		
+		
+		//Guardo el producto
+		int idProduct = service.saveProduct(productBean);
+		
+		log.info("Fin del metodo");
+		//Retorno el id del producto guardado
+		return idProduct;				
 	}
 
 }

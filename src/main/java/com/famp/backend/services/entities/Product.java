@@ -14,16 +14,16 @@ public class Product {
 	
 	@Id
 	@Column(name = "PRODUCT_ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Integer id;
 	
 	@Column(name="PRODUCT_NAME")
 	String name;
 
-	@Column(name="PRODUCT_PRICE", columnDefinition="default '0.00'")
+	@Column(name="PRODUCT_PRICE")
 	Double price;
 
-	@Column(name="PRODUCT_STOCK", columnDefinition="default '0'")
+	@Column(name="PRODUCT_STOCK")
 	Integer stock;
 
 	public Integer getId() {

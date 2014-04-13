@@ -11,8 +11,8 @@
 			<b>id</b>
 		</field>
 			<field>
-			<a>description</a>
-			<b>description</b>
+			<a>name</a>
+			<b>name</b>
 		</field>
 	</mapping>
 </mappings> 
