@@ -13,9 +13,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.famp.backend.domain.DataResponse;
+import com.famp.backend.domain.Response;
 import com.famp.backend.domain.ProductBean;
 import com.famp.backend.services.ProductServices;
 import com.famp.backend.services.entities.Product;
@@ -29,27 +30,27 @@ public class ProductControler {
 	@Autowired
 	ProductServices service;
 	
-	@RequestMapping(value="/products")
+	@RequestMapping(value="/products", method=RequestMethod.GET)
 	@ResponseBody
 	/**
 	 * @author juan eduardo mendoza
 	 * @param response
 	 * @return
 	 */
-	public DataResponse getProducts(HttpServletResponse response){
+	public Response getProducts(HttpServletResponse servletResponse){
 		log.info("Inicio del metodo");
 		
 		//Creo la respuesta
-		DataResponse dataResponse = (DataResponse)context.getBean("dataResponse");
+		Response response = (Response)context.getBean("dataResponse");
 		
 		//Obtengo todos los productos del servicio
 		List<ProductBean> products =  service.getProducts();
 		
-		dataResponse.setData(products);
+		response.setData(products);
 		
 		log.info("Fin del metodo");
 		//Retorno los productos
-		return dataResponse;		
+		return response;		
 	}
 	
 	@RequestMapping(value="/products/save")

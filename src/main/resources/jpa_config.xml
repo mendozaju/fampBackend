@@ -28,14 +28,14 @@
 	<!-- Entity Manager -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		
+		<!-- 
 		<property name="dataSource" ref="datasourceH2" />
 		<property name="persistenceUnitName" value="persistenceUnit" />
-		
-		<!--  
+		-->
+		  
 		<property name="dataSource" ref="dataSourceMySql" />
 		<property name="persistenceUnitName" value="mysql" />
-		-->
+		
 	</bean>
 
 	<!-- Transaction Manager -->
